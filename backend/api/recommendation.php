@@ -6,7 +6,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $singer = $data['singer'];
     $song = $data['song'];
-
-    
 }
 ?>

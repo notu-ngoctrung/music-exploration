@@ -51,8 +51,4 @@ if (empty($CONFIG['spotify_client_id']) || empty($CONFIG['spotify_client_secret'
     read_spotify_secret_key();
     get_new_spotify_token();
 }
-
-// echo var_dump($CONFIG);
-
-// echo var_dump($GLOBAL_DATA);
 ?>
