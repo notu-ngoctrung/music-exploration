@@ -22,10 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo json_encode($result);
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $song = if_song_exists('You belong to me', 'Taylor Swift');
-    echo $song . '<br>';
+// if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+//     $song = if_song_exists('You belong to me', 'Taylor Swift');
+//     echo $song . '<br>';
 
-    get_recommended_list($song['seed'], 10);
-}
+//     get_recommended_list($song['seed'], 10);
+// }
 ?>

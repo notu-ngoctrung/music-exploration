@@ -16,12 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $response = ask_chatgpt_achievement('You belong to me', 'Taylor Swift');
+// if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+//     $response = ask_chatgpt_achievement('You belong to me', 'Taylor Swift');
 
-    echo '<pre>';
-    var_dump($response);
-    echo '</pre>';
-}
+//     echo '<pre>';
+//     var_dump($response);
+//     echo '</pre>';
+// }
 
 ?>
