@@ -47,6 +47,6 @@ function get_new_spotify_token() {
 }
 
 if (empty($GLOBAL_DATA['spotify_authorization'])) {
-    read_spotify_token();
+    get_new_spotify_token();
 }
 ?>
