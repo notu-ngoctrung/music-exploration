@@ -1,5 +1,6 @@
 <?php
 $CONFIG['spotify_api'] = 'https://api.spotify.com/v1';
+$CONFIG['chatgpt_api'] = 'https://api.openai.com/v1/chat/completions';
 
 function read_spotify_token() {
     global $GLOBAL_DATA;
@@ -8,21 +9,31 @@ function read_spotify_token() {
     $GLOBAL_DATA['spotify_authorization'] = trim(fgets($file_content));
     fclose($file_content);
 
-    echo $GLOBAL_DATA['spotify_authorization'];
+    // echo $GLOBAL_DATA['spotify_authorization'];
+}
+
+function read_chatgpt_token() {
+    global $GLOBAL_DATA;
+
+    $file_content = fopen('../chatgpt_token.secretkey', 'r');
+    $GLOBAL_DATA['chatgpt_authorization'] = trim(fgets($file_content));
+    fclose($file_content);
+
+    // echo $GLOBAL_DATA['spotify_authorization'];
 }
 
 function get_new_spotify_token() {
     global $GLOBAL_DATA;
     $spotify_client_secrets = fopen('../spotify.secretkey', 'r');
     $spotify_client_id = trim(fgets($spotify_client_secrets));
-    $spotify_client_secrets = trim(fgets($spotify_client_secrets));
+    $spotify_client_secret = trim(fgets($spotify_client_secrets));
     fclose($spotify_client_secrets);
 
     $url = 'https://accounts.spotify.com/api/token';
     $data = array(
         'grant_type' => 'client_credentials',
         'client_id' => $spotify_client_id,
-        'client_secret' => $spotify_client_secrets,
+        'client_secret' => $spotify_client_secret,
     );
     $headers = array(
         'Content-Type: application/x-www-form-urlencoded'
@@ -44,9 +55,16 @@ function get_new_spotify_token() {
     fclose($file_content);
 
     $GLOBAL_DATA['spotify_authorization'] = 'Bearer '. $json_data['access_token'];
+    // echo $GLOBAL_DATA['spotify_authorization'];
 }
 
 if (empty($GLOBAL_DATA['spotify_authorization'])) {
-    get_new_spotify_token();
+    read_spotify_token();
 }
+
+if (empty($GLOBAL_DATA['chatgpt_authorization'])) {
+    read_chatgpt_token();
+}
+
+
 ?>

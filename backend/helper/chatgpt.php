@@ -1,11 +1,76 @@
 <?php
+require_once('config.php');
 
-function ask_chatgpt_funfact($conversations) {
+function ask_chatgpt_funfact($song, $singer) {
+    global $CONFIG, $GLOBAL_DATA;
 
+    $question = 'List me some fun fact about the song ' . $song . ' by ' . $singer;
+    $url = $CONFIG['chatgpt_api'];
+    $input_data = array(
+        'model' => 'gpt-3.5-turbo',
+        'messages' => array(
+            array(
+                'role' => 'user',
+                'content' => $question
+            )
+        ),
+    );
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($input_data));
+    curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Authorization: ' . $GLOBAL_DATA['chatgpt_authorization']
+    ));
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+    $json_output = json_decode($response, true);
+
+    try {
+        return $json_output['choices'][0]['message']['content'];
+    } catch (Exception $e) {
+        return null;
+    }
 }
 
 function ask_chatgpt_achievement($song, $singer) {
-    
+    global $CONFIG, $GLOBAL_DATA;
+
+    $question = 'List me some achievements of ' . $singer . '\'s ' . $song;
+    $url = $CONFIG['chatgpt_api'];
+    $input_data = array(
+        'model' => 'gpt-3.5-turbo',
+        'messages' => array(
+            array(
+                'role' => 'user',
+                'content' => $question
+            )
+        ),
+    );
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($input_data));
+    curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Authorization: ' . $GLOBAL_DATA['chatgpt_authorization']
+    ));
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+    $json_output = json_decode($response, true);
+
+    try {
+        return $json_output['choices'][0]['message']['content'];
+    } catch (Exception $e) {
+        return null;
+    }
 }
 
 ?>

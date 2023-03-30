@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     header('Content-Type: application/json');
     try {
-        echo json_encode(ask_chatgpt_funfact($song, $singer));
+        echo json_encode(ask_chatgpt_achievement($song, $singer));
     } catch (Exception $e) {
         http_response_code(500);
         echo json_encode('ChatGPT error');
