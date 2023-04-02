@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = 'No song is found';
     } else {
         http_response_code(200);
-        $result = get_recommended_list($found_song['seed'], 10);
+        $result = get_recommended_list($found_song['seed'], 10, $found_song);
     }
 
     echo json_encode($result);

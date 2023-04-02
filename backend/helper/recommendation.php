@@ -2,6 +2,12 @@
 
 require_once('config.php');
 
+header('Access-Control-Allow-Origin: *');
+
+header('Access-Control-Allow-Methods: GET, POST');
+
+header("Access-Control-Allow-Headers: *");
+
 function if_song_exists($song, $singer) {
     global $CONFIG, $GLOBAL_DATA;
     $url = $CONFIG['spotify_api'] . '/search?q=' . urlencode($song) . '+artist:' . urlencode($singer) 
@@ -31,9 +37,23 @@ function if_song_exists($song, $singer) {
         return null;
     }
 
+    $track = $json_data['tracks']['items'][0];
+    $singers = array();
+    foreach ($track['artists'] as $artist) {
+        array_push($singers, array(
+            'seed' => $artist['id'],
+            'name' => $artist['name'],
+        ));
+    }
+
     return array(
         'seed' => $json_data['tracks']['items'][0]['id'],
         'name' => $json_data['tracks']['items'][0]['name'],
+        'singers' => $singers,
+        'preview_url' => $track['preview_url'],
+        'song_url' => $track['external_urls']['spotify'],
+        'image_url' => $track['album']['images'][0]['url'],
+        'popularity' => $track['popularity'],
     );
 
     // echo '<br>' .$url . '<br>';
@@ -43,7 +63,7 @@ function if_song_exists($song, $singer) {
     // echo '</pre>';
 }
 
-function get_recommended_list($seed_track, $limit) {
+function get_recommended_list($seed_track, $limit, $original_song) {
     global $CONFIG, $GLOBAL_DATA;
     $url = $CONFIG['spotify_api'] . '/recommendations?'
         . 'seed_tracks=' . $seed_track
@@ -89,6 +109,7 @@ function get_recommended_list($seed_track, $limit) {
             'name' => $track['name'],
             'singers' => $singers,
             'preview_url' => $track['preview_url'],
+            'song_url' => $track['external_urls']['spotify'],
             'image_url' => $track['album']['images'][0]['url'],
             'popularity' => $track['popularity'],
         ));
@@ -98,7 +119,10 @@ function get_recommended_list($seed_track, $limit) {
     // var_dump($result);
     // echo '</pre>';
 
-    return $result;
+    return array(
+        'original' => $original_song,
+        'recommendation' => $result,
+    );
 }
 
 ?>
