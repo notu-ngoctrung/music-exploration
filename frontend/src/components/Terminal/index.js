@@ -4,11 +4,13 @@ import OutputText from './OutputText';
 import OutputSongs from './OutputSongs';
 import './index.css';
 import CmdInput from './CmdInput';
+import Siriwave from 'react-siriwave';
 
 function Terminal(props) {
   const AlwaysScrollToBottom = () => {
     const elementRef = useRef();
     useEffect(() => elementRef.current.scrollIntoView());
+    useEffect(() => elementRef.current.scrollIntoView(), [props.loading]);
     return <div ref={elementRef} />;
   };
 
@@ -26,7 +28,7 @@ function Terminal(props) {
               case 'cmd':
                 return <CmdLine cmd={item.content} />;
               case 'output-text':
-                return <OutputText text={item.content} />;
+                return <OutputText text={item.content} setLoading={props.setLoading} typingEnabled={item.typingEnabled || false} />;
               case 'output-songs':
                 return <OutputSongs content={item.content} />;
             }
@@ -35,7 +37,21 @@ function Terminal(props) {
           <OutputSongs content={songs} />
           <CmdLine cmd="fun-fact 0" />
           <OutputText text={text} /> */}
+
+          <div style={{
+            display: props.loading ? 'block' : 'none',
+          }}>
+            <Siriwave
+              theme='ios9'
+              speed={0.05}
+              amplitude={2}
+              width={300}
+              height={100}
+            />    
+          </div>
+
           <CmdInput 
+            loading={props.loading}
             currentCmd={props.currentCmd} 
             setCurrentCmd={props.setCurrentCmd}
             setHistory={props.setHistory}

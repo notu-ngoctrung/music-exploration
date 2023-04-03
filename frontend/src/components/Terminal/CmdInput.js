@@ -28,7 +28,9 @@ function CmdInput(props) {
     <div className='cmdline-wrapper'> 
       <span className='cmdline-icon'>❯</span> 
       <input 
+        // onBlur={(e) => e.target.focus()}
         autoFocus
+        readOnly={props.loading}
         className='cmdinput-input'
         value={props.currentCmd}
         onChange={handleInputChange}
