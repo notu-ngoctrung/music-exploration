@@ -1,6 +1,12 @@
 <?php
 require_once('config.php');
 
+header('Access-Control-Allow-Origin: *');
+
+header('Access-Control-Allow-Methods: GET, POST');
+
+header("Access-Control-Allow-Headers: *");
+
 function ask_chatgpt($question) {
     global $CONFIG, $GLOBAL_DATA;
 
@@ -29,10 +35,12 @@ function ask_chatgpt($question) {
     curl_close($ch);
     $json_output = json_decode($response, true);
 
+    // echo var_dump($json_output);
+
     try {
         return $json_output['choices'][0]['message']['content'];
     } catch (Exception $e) {
-        return null;
+        return "ChatGPT is now busy. Please try again in 1 hour!";
     }
 }
 
@@ -47,8 +55,8 @@ function ask_chatgpt_achievement($song, $singer) {
 }
 
 function ask_chatgpt_similarity($original_song, $suggested_song) {
-    $question = 'Objectively, how does ' . $suggested_song['singer'] . '\'s ' . $suggested_song['name']
-        . ' have similar vibes to ' . $original_song['singer'] . '\'s ' . $original_song['name']
+    $question = 'Objectively, how does ' . $suggested_song['name'] . ' by ' . $suggested_song['singer']
+        . ' have similar vibes to ' . $original_song['name'] . ' by ' . $original_song['singer']
         . '?';
     return ask_chatgpt($question);
 }

@@ -6,8 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $singer = $data['singer'];
     $song = $data['song'];
+    $limit = $data['limit'];
 
-    $found_song = if_song_exists('You belong to me', 'Taylor Swift');
+    $found_song = if_song_exists($song, $singer);
     
     header('Content-Type: application/json');
     $result = '';
@@ -16,16 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = 'No song is found';
     } else {
         http_response_code(200);
-        $result = get_recommended_list($found_song['seed'], 10, $found_song);
+        $result = get_recommended_list($found_song['seed'], $limit, $found_song);
     }
 
     echo json_encode($result);
 }
-
-// if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-//     $song = if_song_exists('You belong to me', 'Taylor Swift');
-//     echo $song . '<br>';
-
-//     get_recommended_list($song['seed'], 10);
-// }
 ?>

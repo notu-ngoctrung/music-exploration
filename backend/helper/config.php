@@ -2,14 +2,18 @@
 $CONFIG['spotify_api'] = 'https://api.spotify.com/v1';
 $CONFIG['chatgpt_api'] = 'https://api.openai.com/v1/chat/completions';
 
+header('Access-Control-Allow-Origin: *');
+
+header('Access-Control-Allow-Methods: GET, POST');
+
+header("Access-Control-Allow-Headers: *");
+
 function read_spotify_token() {
     global $GLOBAL_DATA;
 
     $file_content = fopen('../spotify_token.secretkey', 'r');
     $GLOBAL_DATA['spotify_authorization'] = trim(fgets($file_content));
     fclose($file_content);
-
-    // echo $GLOBAL_DATA['spotify_authorization'];
 }
 
 function read_chatgpt_token() {
@@ -18,8 +22,6 @@ function read_chatgpt_token() {
     $file_content = fopen('../chatgpt_token.secretkey', 'r');
     $GLOBAL_DATA['chatgpt_authorization'] = trim(fgets($file_content));
     fclose($file_content);
-
-    // echo $GLOBAL_DATA['spotify_authorization'];
 }
 
 function get_new_spotify_token() {
@@ -55,7 +57,6 @@ function get_new_spotify_token() {
     fclose($file_content);
 
     $GLOBAL_DATA['spotify_authorization'] = 'Bearer '. $json_data['access_token'];
-    // echo $GLOBAL_DATA['spotify_authorization'];
 }
 
 if (empty($GLOBAL_DATA['spotify_authorization'])) {

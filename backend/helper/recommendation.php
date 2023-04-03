@@ -2,12 +2,6 @@
 
 require_once('config.php');
 
-header('Access-Control-Allow-Origin: *');
-
-header('Access-Control-Allow-Methods: GET, POST');
-
-header("Access-Control-Allow-Headers: *");
-
 function if_song_exists($song, $singer) {
     global $CONFIG, $GLOBAL_DATA;
     $url = $CONFIG['spotify_api'] . '/search?q=' . urlencode($song) . '+artist:' . urlencode($singer) 
@@ -54,13 +48,8 @@ function if_song_exists($song, $singer) {
         'song_url' => $track['external_urls']['spotify'],
         'image_url' => $track['album']['images'][0]['url'],
         'popularity' => $track['popularity'],
+        'release_date' => $track['album']['release_date'],
     );
-
-    // echo '<br>' .$url . '<br>';
-    // echo empty($something);
-    // echo '<pre>';
-    // var_dump($json_data);
-    // echo '</pre>';
 }
 
 function get_recommended_list($seed_track, $limit, $original_song) {
@@ -72,8 +61,6 @@ function get_recommended_list($seed_track, $limit, $original_song) {
     $headers = array(
         'Authorization: ' . $GLOBAL_DATA['spotify_authorization']
     );
-
-    // echo $url . '<br>';
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
@@ -89,10 +76,6 @@ function get_recommended_list($seed_track, $limit, $original_song) {
         get_new_spotify_token();
         return get_recommended_list($seed_track, $limit);
     }
-
-    // echo '<pre>';
-    // var_dump($json_data);
-    // echo '</pre>';
 
     $result = array();
     foreach ($json_data['tracks'] as $track) {
@@ -112,6 +95,7 @@ function get_recommended_list($seed_track, $limit, $original_song) {
             'song_url' => $track['external_urls']['spotify'],
             'image_url' => $track['album']['images'][0]['url'],
             'popularity' => $track['popularity'],
+            'release_date' => $track['album']['release_date'],
         ));
     }
     
