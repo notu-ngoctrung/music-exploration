@@ -35,7 +35,7 @@ function App() {
   const handleSuggestMe = (args) => {
     let song = null;
     let singer = null;
-    let queryNum = '10';
+    let queryNum = '5';
 
     args.forEach(arg => {
       const contentParts = arg.split(' ');
@@ -410,7 +410,7 @@ function App() {
       case 'preview':
         handlePreview(argsContent);
         break;
-      case 'funfact':
+      case 'fun-fact':
         handleFunFact(argsContent);
         break;
       case 'achievement':

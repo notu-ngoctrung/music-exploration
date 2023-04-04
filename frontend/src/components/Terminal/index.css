@@ -52,9 +52,9 @@
 }
 
 .output-text-wrapper {
-    border-left: 1.5px solid #93E9BE;
+    /* border-left: 1.5px solid #93E9BE; */
     display: flex;
-    padding-left: 1rem;
+    /* padding-left: 1rem; */
     margin-bottom: 15px;
     /* margin-top: 15px; */
 }
