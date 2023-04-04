@@ -6,14 +6,18 @@ import Header from './components/Header';
 // import "react-animated-term/dist/react-animated-term.css";
 import Terminal from './components/Terminal';
 import * as helperFF from './helper/funFact';
+import * as helperPreview from './helper/audioPreview';
 
 function App() {
   const BACKEND_API = 'http://127.0.0.1:8000';
 
-
   const [history, setHistory] = useState([]);
   const [songs, setSongs] = useState([]);
   const [currentCmd, setCurrentCmd] = useState('');
+  const [audioPreview, setAudioPreview] = useState({
+    enabled: false,
+    url: null,
+  });
 
   const [loading, setLoading] = useState(false);
 
@@ -119,6 +123,28 @@ function App() {
       setLoading(false);
       return;
     }
+
+    id = parseInt(id);
+
+    if (!helperFF.validSongId(id, songs.length)) {
+      printInvalidCmd('--id is out of bound. Please revise!');
+      setLoading(false);
+      return;
+    }
+
+    if (!helperPreview.songPreviewable(songs[id])) {
+      printInvalidCmd(`Preview is currently not available due to copyright :(\nPlease directly listen to the song @ ${songs[id]['song_url']}`);
+      setLoading(false);
+      return;
+    }
+
+    printInvalidCmd(`Previewing ${songs[id]['name']} by ${songs[id]['singers'].map(e => e['name']).join(', ')}`)
+    setAudioPreview({
+      enabled: true,
+      url: songs[id]['preview_url']
+    });
+
+    setLoading(false);
   }
 
   const handleSimilarity = (args) => {
@@ -336,6 +362,10 @@ function App() {
 
   const handleCmdSubmit = (cmd) => {
     setLoading(true);
+    setAudioPreview(preview => ({
+      ...preview,
+      enabled: false,
+    }));
 
     const args = cmd.split('--').map(ar => ar.trim());
     if (args.length == 0) {
@@ -386,6 +416,8 @@ function App() {
         setCurrentCmd={setCurrentCmd}
         loading={loading}
         setLoading={setLoading}
+        audioPreview={audioPreview}
+        setAudioPreview={setAudioPreview}
 
         handleCmdSubmit={handleCmdSubmit}
       />

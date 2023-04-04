@@ -5,6 +5,7 @@ import OutputSongs from './OutputSongs';
 import './index.css';
 import CmdInput from './CmdInput';
 import Siriwave from 'react-siriwave';
+import PreviewPlayer from '../PreviewPlayer';
 
 function Terminal(props) {
   const AlwaysScrollToBottom = () => {
@@ -33,6 +34,7 @@ function Terminal(props) {
                 return <OutputSongs content={item.content} />;
             }
           })}
+          {/* <OutputText text={"something <a href=\"https://google.com\"> google </a>"} /> */}
           {/* <CmdLine cmd="suggest-me -n 10 -singer Taylor Swift -song You believe in me" />
           <OutputSongs content={songs} />
           <CmdLine cmd="fun-fact 0" />
@@ -50,7 +52,12 @@ function Terminal(props) {
             />    
           </div>
 
+          {props.audioPreview['enabled'] && (
+            <PreviewPlayer url={props.audioPreview['url']} />
+          )}
+
           <CmdInput 
+            history={props.history}
             loading={props.loading}
             currentCmd={props.currentCmd} 
             setCurrentCmd={props.setCurrentCmd}

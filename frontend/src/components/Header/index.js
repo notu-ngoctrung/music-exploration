@@ -26,7 +26,7 @@ function Header() {
           }} title="Trung Nguyen">@notu-ngoctrung</a>.
         </div>
         <div style={{marginTop: '0.5rem'}}>
-          <b>need help?</b> click <a href="https://github.com/notu-ngoctrung" target={'_blank'} style={{
+          <b>first time user?</b> click <a href="https://github.com/notu-ngoctrung" target={'_blank'} style={{
             textDecorationLine: 'underline',
           }} title="Trung Nguyen">here</a>.
         </div>
