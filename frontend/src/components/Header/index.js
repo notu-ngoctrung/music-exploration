@@ -3,7 +3,7 @@ import THEME from '../../color-scheme';
 
 import './index.css';
 
-function Header() {
+function Header(props) {
   return (
     <>
       <div id="header" className='wrapper'>
