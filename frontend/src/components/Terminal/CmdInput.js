@@ -57,6 +57,7 @@ function CmdInput(props) {
       <span className='cmdline-icon'>❯</span> 
       <input 
         // onBlur={(e) => e.target.focus()}
+        placeholder='suggest-me --limit 5 --song Hello --singer Adele'
         autoFocus
         readOnly={props.loading}
         className='cmdinput-input'

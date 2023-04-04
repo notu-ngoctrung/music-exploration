@@ -173,6 +173,12 @@ function App() {
       return;
     }
 
+    if (secondId === firstId) {
+      printInvalidCmd('--first and --second must be different.');
+      setLoading(false);
+      return;
+    }
+
     setHistory(hist => {
       const newHist = [...hist];
       newHist.push({
@@ -360,12 +366,28 @@ function App() {
     })
   }
 
+  const handleHelp = (args) => {
+    const cmds = (args !== undefined ? args : []);
+    // console.log(args)
+    setHistory(hist => {
+      const newHist = [...hist];
+      newHist.push({
+        type: 'help',
+        content: cmds
+      })
+      return newHist
+    });
+    setLoading(false);
+  }
+
   const handleCmdSubmit = (cmd) => {
     setLoading(true);
     setAudioPreview(preview => ({
       ...preview,
       enabled: false,
     }));
+
+    console.log(cmd.split('--'));
 
     const args = cmd.split('--').map(ar => ar.trim());
     if (args.length == 0) {
@@ -398,6 +420,10 @@ function App() {
         handleSimilarity(argsContent);
         break;
       default:
+        if (args[0].includes('help')) {
+          handleHelp(args[0].split(' ').slice(1));
+          return;
+        }
         printInvalidCmd('Invalid command. No command type found');
         setLoading(false);
         break;

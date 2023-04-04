@@ -26,8 +26,9 @@ function Header() {
           }} title="Trung Nguyen">@notu-ngoctrung</a>.
         </div>
         <div style={{marginTop: '0.5rem'}}>
-          <b>first time user?</b> type <b><a href="#" style={{
-            textDecorationLine: 'underline',
+          <b>first time user?</b> enter <b><a href="" style={{
+            textDecorationLine: 'none',
+            color: THEME.secondaryDarker
           }} title="Trung Nguyen">help</a></b> command in the below terminal.
         </div>
       </div>

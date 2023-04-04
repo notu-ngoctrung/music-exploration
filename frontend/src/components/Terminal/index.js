@@ -6,6 +6,7 @@ import './index.css';
 import CmdInput from './CmdInput';
 import Siriwave from 'react-siriwave';
 import PreviewPlayer from '../PreviewPlayer';
+import HelpSection from './HelpSection.js';
 
 function Terminal(props) {
   const AlwaysScrollToBottom = () => {
@@ -32,6 +33,8 @@ function Terminal(props) {
                 return <OutputText text={item.content} setLoading={props.setLoading} typingEnabled={item.typingEnabled || false} />;
               case 'output-songs':
                 return <OutputSongs content={item.content} />;
+              case 'help':
+                return <HelpSection cmds={item.content} />
             }
           })}
           {/* <OutputText text={"something <a href=\"https://google.com\"> google </a>"} /> */}
@@ -55,6 +58,8 @@ function Terminal(props) {
           {props.audioPreview['enabled'] && (
             <PreviewPlayer url={props.audioPreview['url']} />
           )}
+
+          {/* <HelpSection cmds={[]} /> */}
 
           <CmdInput 
             history={props.history}
