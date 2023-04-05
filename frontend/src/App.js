@@ -11,9 +11,9 @@ import * as helperPreview from './helper/audioPreview';
 function App() {
   // const BACKEND_API = 'http://127.0.0.1:8000';
 
-  // const BACKEND_API = 'https://eecslab-22.case.edu/~tnn18/music-exploration/backend';
+  const BACKEND_API = 'http://eecslab-22.case.edu/~tnn18/music-exploration/backend';
 
-  const BACKEND_API = '';
+  // const BACKEND_API = '';
 
   const [history, setHistory] = useState([]);
   const [songs, setSongs] = useState([]);
