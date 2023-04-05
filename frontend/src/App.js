@@ -90,9 +90,11 @@ function App() {
     .then(res => {
       // console.log(BACKEND_API + '/api/recommendation.php');
       // console.log(res);
-      if (!res.ok)
-        throw new Error('Backend is busy. Please try again!');
-      return res.json();
+      if (res.ok)
+        return res.json();
+      if (res.status == 400)
+        throw new Error('No song is found with the given input. Please revise your input.')
+      throw new Error('Backend is busy. Please try again!');
     })
     .then(data => {
       const originalSong = data['original'];
