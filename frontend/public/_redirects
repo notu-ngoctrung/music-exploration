@@ -1,1 +1,5 @@
-/api/* http://eecslab-22.case.edu/~tnn18/music-exploration/backend/api/:splat 200!
+/api/recommendation.php http://eecslab-22.case.edu/~tnn18/music-exploration/backend/api/recommendation.php 200!
+/api/funfact.php http://eecslab-22.case.edu/~tnn18/music-exploration/backend/api/funfact.php 200!
+/api/similarity.php http://eecslab-22.case.edu/~tnn18/music-exploration/backend/api/similarity.php 200!
+/api/status.php http://eecslab-22.case.edu/~tnn18/music-exploration/backend/api/status.php 200!
+/api/achievement.php http://eecslab-22.case.edu/~tnn18/music-exploration/backend/api/achievement.php 200!
