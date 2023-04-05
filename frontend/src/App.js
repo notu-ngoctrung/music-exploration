@@ -9,7 +9,9 @@ import * as helperFF from './helper/funFact';
 import * as helperPreview from './helper/audioPreview';
 
 function App() {
-  const BACKEND_API = 'http://127.0.0.1:8000';
+  // const BACKEND_API = 'http://127.0.0.1:8000';
+
+  const BACKEND_API = 'http://eecslab-22.case.edu/~tnn18/music-exploration/backend';
 
   const [history, setHistory] = useState([]);
   const [songs, setSongs] = useState([]);
