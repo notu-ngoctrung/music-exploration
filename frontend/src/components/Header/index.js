@@ -10,8 +10,8 @@ function Header(props) {
         <p style={{
           fontSize: '3.5rem',
           fontWeight: 600,
-          marginTop: '4rem',
-          marginBottom: '2.5rem'
+          marginTop: '3.5rem',
+          marginBottom: '3rem'
         }}>
           <label style={{ color: THEME.secondaryDarker }}>MUSIC</label> EXPLORATION
         </p>
