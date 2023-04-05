@@ -11,7 +11,9 @@ import * as helperPreview from './helper/audioPreview';
 function App() {
   // const BACKEND_API = 'http://127.0.0.1:8000';
 
-  const BACKEND_API = 'http://eecslab-22.case.edu/~tnn18/music-exploration/backend';
+  // const BACKEND_API = 'https://eecslab-22.case.edu/~tnn18/music-exploration/backend';
+
+  const BACKEND_API = '';
 
   const [history, setHistory] = useState([]);
   const [songs, setSongs] = useState([]);
@@ -86,6 +88,8 @@ function App() {
       })
     })
     .then(res => {
+      // console.log(BACKEND_API + '/api/recommendation.php');
+      // console.log(res);
       if (!res.ok)
         throw new Error('Backend is busy. Please try again!');
       return res.json();
