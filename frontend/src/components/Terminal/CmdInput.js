@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+/**
+ * Input component
+ */
 function CmdInput(props) {
   const [cmdHist, setCmdHist] = useState(['']);
   const [cmdId, setCmdId] = useState(0);

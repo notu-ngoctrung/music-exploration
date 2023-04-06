@@ -4,6 +4,9 @@ import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
 
+/**
+ * Component to preview a song
+ */
 function PreviewPlayer(props) {
   return (
     <>

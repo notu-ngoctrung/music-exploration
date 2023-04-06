@@ -6,6 +6,9 @@ import PreviewCmd from './preview';
 import SimilarityCmd from './similarity';
 import SuggestMeCmd from './suggest-me';
 
+/**
+ * Component of "help"
+ */
 function HelpSection(props) {
   const listCmd = props.cmds.length > 0
     ? props.cmds 

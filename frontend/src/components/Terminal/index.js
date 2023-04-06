@@ -8,6 +8,11 @@ import Siriwave from 'react-siriwave';
 import PreviewPlayer from '../PreviewPlayer';
 import HelpSection from './HelpSection.js';
 
+/**
+ * Terminal component.
+ * 
+ * It displays the terminal and sets out the logical rules.
+ */
 function Terminal(props) {
   const AlwaysScrollToBottom = () => {
     const elementRef = useRef();
@@ -37,11 +42,6 @@ function Terminal(props) {
                 return <HelpSection cmds={item.content} />
             }
           })}
-          {/* <OutputText text={"something <a href=\"https://google.com\"> google </a>"} /> */}
-          {/* <CmdLine cmd="suggest-me -n 10 -singer Taylor Swift -song You believe in me" />
-          <OutputSongs content={songs} />
-          <CmdLine cmd="fun-fact 0" />
-          <OutputText text={text} /> */}
 
           <div style={{
             display: props.loading ? 'block' : 'none',

@@ -3,7 +3,10 @@ import THEME from '../../color-scheme';
 
 import './index.css';
 
-function Header(props) {
+/**
+ * Application header
+ */
+function Header() {
   return (
     <>
       <div id="header" className='wrapper'>

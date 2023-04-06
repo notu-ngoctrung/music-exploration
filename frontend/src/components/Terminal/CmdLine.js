@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-
+/**
+ * Component of cmd
+ */
 function CmdLine(props) {
   return (
     <>

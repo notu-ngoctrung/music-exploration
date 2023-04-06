@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+/**
+ * Component of each displayed song
+ */
 function DisplaySong(props) {
   return (
     <>
