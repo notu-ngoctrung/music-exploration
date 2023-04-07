@@ -2,6 +2,14 @@
 
 require_once('config.php');
 
+/**
+ * Search for a song
+ * 
+ * @param   string  $song   Song name
+ * @param   string  $singer Singer name
+ * 
+ * @return  {*}     The retrieved song
+ */
 function if_song_exists($song, $singer) {
     global $CONFIG, $GLOBAL_DATA;
     $url = $CONFIG['spotify_api'] . '/search?q=' . urlencode($song) . '+artist:' . urlencode($singer) 
@@ -52,6 +60,15 @@ function if_song_exists($song, $singer) {
     );
 }
 
+/**
+ *  Suggest songs that have similar vibes to a given song
+ * 
+ * @param   string  $seed_track     The original song's Spotify seed
+ * @param   integer $limit          The limit
+ * @param   {*}     $original_song  The original song.
+ * 
+ * @return  {*}     {'original': {*}, 'recommendation': [{*}...]}
+ */
 function get_recommended_list($seed_track, $limit, $original_song) {
     global $CONFIG, $GLOBAL_DATA;
     $url = $CONFIG['spotify_api'] . '/recommendations?'
@@ -98,10 +115,6 @@ function get_recommended_list($seed_track, $limit, $original_song) {
             'release_date' => $track['album']['release_date'],
         ));
     }
-    
-    // echo '<pre>';
-    // var_dump($result);
-    // echo '</pre>';
 
     return array(
         'original' => $original_song,

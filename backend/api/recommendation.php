@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Content-Type: application/json');
     $result = '';
     if (empty($found_song)) {
+        // Set the bad request header code
         http_response_code(400);
         $result = 'No song is found';
     } else {

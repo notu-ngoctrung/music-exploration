@@ -8,6 +8,9 @@ header('Access-Control-Allow-Methods: GET, POST');
 
 header("Access-Control-Allow-Headers: *");
 
+/**
+ * Read the Spotify API token
+ */
 function read_spotify_token() {
     global $GLOBAL_DATA;
 
@@ -16,6 +19,9 @@ function read_spotify_token() {
     fclose($file_content);
 }
 
+/**
+ * Read the ChatGPT API token
+ */
 function read_chatgpt_token() {
     global $GLOBAL_DATA;
 
@@ -24,6 +30,9 @@ function read_chatgpt_token() {
     fclose($file_content);
 }
 
+/**
+ * Update the Spotify secret key if it is expired.
+ */
 function get_new_spotify_token() {
     global $GLOBAL_DATA;
     $spotify_client_secrets = fopen('../spotify.secretkey', 'r');
