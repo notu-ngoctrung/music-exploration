@@ -19,9 +19,9 @@ import * as helperPreview from './helper/audioPreview';
  *      ...each function matches with a command and is responsible to get the answer for such command.
  */
 function App() {
-  // const BACKEND_API = 'http://127.0.0.1:8000';
+  const BACKEND_API = 'http://127.0.0.1:8080';
 
-  const BACKEND_API = 'http://eecslab-22.case.edu/~tnn18/music-exploration/backend';
+  // const BACKEND_API = 'http://eecslab-22.case.edu/~tnn18/music-exploration/backend';
 
   const [history, setHistory] = useState([]);
   const [songs, setSongs] = useState([]);
