@@ -1,5 +1,5 @@
 <?php
-require_once('../helper/recommendation.php');
+require_once('../helper/spotify.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);

@@ -2,6 +2,73 @@
 
 require_once('config.php');
 
+function get_track_id($song, $singer) {
+    global $CONFIG, $GLOBAL_DATA;
+
+    $patterns = array("/ & /", "/ X /", "/,/", "/ x /");
+    $replacements = array(" ", " ", " ", " ");
+    $singer = preg_replace($patterns, $replacements, $singer);
+
+    $url = $CONFIG['spotify_api'] . '/search?q=' . urlencode($song) . '+artist:' . urlencode($singer) 
+        . '&type=track'
+        . '&limit=1';
+    
+    $headers = array(
+        'Authorization: ' . $GLOBAL_DATA['spotify_authorization']
+    );
+
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_HTTPGET, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $json_data = json_decode($response, true);
+
+    if (!empty($json_data['error']) && $json_data['error']['status'] == 401) {
+        get_new_spotify_token();
+        return get_track_id($song, $singer);
+    }
+
+    if (empty($json_data) || empty($json_data['tracks']) || empty($json_data['tracks']['items'])) {
+        return null;
+    }
+
+    $track = $json_data['tracks']['items'][0];
+    return $track['id'];
+}
+
+function get_track_features($track_id) {
+    global $CONFIG, $GLOBAL_DATA;
+
+    $url = $CONFIG['spotify_api'] . "/audio-features/" . $track_id;
+
+    // echo $url;
+
+    $headers = array(
+        'Authorization: ' . $GLOBAL_DATA['spotify_authorization']
+    );
+
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_HTTPGET, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $json_data = json_decode($response, true);
+
+    if (!empty($json_data['error']) && $json_data['error']['status'] == 401) {
+        get_new_spotify_token();
+        return get_track_features($track_id);
+    }
+
+    return $json_data;
+}
+
 /**
  * Search for a song
  * 
@@ -12,6 +79,11 @@ require_once('config.php');
  */
 function if_song_exists($song, $singer) {
     global $CONFIG, $GLOBAL_DATA;
+
+    $patterns = array("/ & /", "/ X /", "/,/", "/ x /");
+    $replacements = array(" ", " ", " ", " ");
+    $singer = preg_replace($patterns, $replacements, $singer);
+
     $url = $CONFIG['spotify_api'] . '/search?q=' . urlencode($song) . '+artist:' . urlencode($singer) 
         . '&type=track'
         . '&limit=1';
@@ -34,6 +106,9 @@ function if_song_exists($song, $singer) {
         get_new_spotify_token();
         return if_song_exists($song, $singer);
     }
+
+    echo $url; 
+    // return $json_data;
 
     if (empty($json_data) || empty($json_data['tracks']) || empty($json_data['tracks']['items'])) {
         return null;
