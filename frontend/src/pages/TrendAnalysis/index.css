@@ -1,0 +1,28 @@
+.hot-100-song-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.hot-100-singer-name {
+    font-size: 0.85em;
+    opacity: 70%;
+    display: inline-block;
+}
+
+.hot-100-url {
+    font-size: 0.85em;
+    opacity: 70%;
+    display: inline-block;
+}
+
+.hot-100-ranking {
+    font-size: 2.8em;
+    font-weight: bold;
+    display: inline-block;
+    min-width: 2.1em;
+}
+
+.hot-100-item-info {
+    padding-left: 0.8em;
+}   

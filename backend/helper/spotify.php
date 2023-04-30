@@ -91,7 +91,7 @@ function if_song_exists($song, $singer) {
         'image_url' => $track['album']['images'][0]['url'],
         'popularity' => $track['popularity'],
         'release_date' => $track['album']['release_date'],
-        'genres' => $track['album']['genres']
+        'genres' => empty($track['album']['genres']) ? array() : $track['album']['genres']
     );
 }
 
