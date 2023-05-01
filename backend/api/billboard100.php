@@ -7,6 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $result = array();
 
+    $track_ids = array();
+
     header('Content-Type: application/json');
     foreach ($top_100 as $track) {
         // Full details
@@ -22,13 +24,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         // 3. If also not found, try search for the title only
         if (empty($song['seed'])) 
             $song = if_song_exists($track['title'], '');
-        // 4. If also not found, give up :)
-        if (empty($song['seed'])) {
-            // echo "\n". $track['title'] . ' |||| ' . $track['singers'] . "\n";
-            $song['features'] = null;
+
+        if (!empty($song['seed'])) {
+            array_push($track_ids, $song['seed']);
         }
-        else $song['features'] = get_track_features($song['seed']);
         array_push($result, $song);
+    }
+
+    $all_song_features = get_tracks_features($track_ids);
+    $current_feature_id = 0;
+
+    foreach ($result as $song) {
+        if (empty($song['seed'])) {
+            $song['features'] = null;
+        } else {
+            $song['features'] = $all_song_features[$current_feature_id];
+        }
+
+        $current_feature_id += 1;
     }
 
     echo json_encode($result);

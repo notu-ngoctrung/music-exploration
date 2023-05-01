@@ -31,6 +31,35 @@ function get_track_features($track_id) {
     return $json_data;
 }
 
+function get_tracks_features($track_ids) {
+    global $CONFIG, $GLOBAL_DATA;
+
+    $url = $CONFIG['spotify_api'] . "/audio-features?ids=" . urlencode(implode(',', $track_ids));
+
+    // echo $url;
+
+    $headers = array(
+        'Authorization: ' . $GLOBAL_DATA['spotify_authorization']
+    );
+
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_HTTPGET, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $json_data = json_decode($response, true);
+
+    if (!empty($json_data['error']) && $json_data['error']['status'] == 401) {
+        get_new_spotify_token();
+        return get_track_features($track_ids);
+    }
+
+    return $json_data['audio_features'];
+}
+
 /**
  * Search for a song
  * 

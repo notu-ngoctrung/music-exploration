@@ -11,6 +11,20 @@ function calculateAvgNumeric(songs, feature) {
   return (totalFeature / numSongs);
 }
 
+function getChartFreqVsData(songs, feature, roundOffset, multiplyOffset=1) {
+  let freq = {};
+  songs.forEach(e => {
+    if (e['features'][feature] !== null) {
+      const key = Math.floor(e['features'][feature] * multiplyOffset / roundOffset) * roundOffset;
+      if (!(key in freq))
+        freq[key] = 0;
+      // inc by 1
+      freq[key] += 1;
+    }
+  });
+  return freq;
+}
+
 export function calculateMostUsedKey(songs) {
   const keys = {};
   let mostFreq = 0;
@@ -64,3 +78,114 @@ export function calculateAvgInstrumentalness(songs) {
 export function calculateAvgLoudness(songs) {
   return (calculateAvgNumeric(songs, 'loudness')).toFixed(2);
 }
+
+export function getTempoChartJsData(songs) {
+  const tempoFreq = getChartFreqVsData(songs, 'tempo', 10);
+
+  console.log(Object.entries(tempoFreq).map(([x, y]) => ({x: x, y: y})));
+
+  return {
+    datasets: [{
+      data: Object.entries(tempoFreq).map(([x, y]) => ({x: x, y: y})).sort((a, b) => a.x - b.x),
+      fill: true,
+      borderColor: 'rgb(75, 192, 192)',
+    }]
+  };
+}
+
+export function getKeyChartJsData(songs) {
+  const keyFreq = getChartFreqVsData(songs, 'key', 1);
+
+  return {
+    datasets: [{
+      data: Object.entries(keyFreq).map(([x, y]) => ({x: x, y: y})).sort((a, b) => a.x - b.x),
+      fill: true,
+      borderColor: 'rgb(75, 192, 192)',
+    }]
+  };
+}
+
+export function getLoudnessChartJsData(songs) {
+  const freq = getChartFreqVsData(songs, 'loudness', 1);
+
+  return {
+    datasets: [{
+      data: Object.entries(freq).map(([x, y]) => ({x: x, y: y})).sort((a, b) => a.x - b.x),
+      fill: true,
+      borderColor: 'rgb(75, 192, 192)',
+    }]
+  };
+}
+
+export function getEnergyChartJsData(songs) {
+  const freq = getChartFreqVsData(songs, 'energy', 10, 100);
+
+  return {
+    datasets: [{
+      data: Object.entries(freq).map(([x, y]) => ({x: x, y: y})).sort((a, b) => a.x - b.x),
+      fill: true,
+      borderColor: 'rgb(75, 192, 192)',
+    }]
+  };
+}
+
+export function getDanceabilityChartJsData(songs) {
+  const freq = getChartFreqVsData(songs, 'danceability', 10, 100);
+
+  return {
+    datasets: [{
+      data: Object.entries(freq).map(([x, y]) => ({x: x, y: y})).sort((a, b) => a.x - b.x),
+      fill: true,
+      borderColor: 'rgb(75, 192, 192)',
+    }]
+  };
+}
+
+export function getAcousticnessChartJsData(songs) {
+  const freq = getChartFreqVsData(songs, 'acousticness', 0.1);
+
+  return {
+    datasets: [{
+      data: Object.entries(freq).map(([x, y]) => ({x: x, y: y})).sort((a, b) => a.x - b.x),
+      fill: true,
+      borderColor: 'rgb(75, 192, 192)',
+    }]
+  };
+}
+
+export function getValenceChartJsData(songs) {
+  const freq = getChartFreqVsData(songs, 'valence', 0.1);
+
+  return {
+    datasets: [{
+      data: Object.entries(freq).map(([x, y]) => ({x: x, y: y})).sort((a, b) => a.x - b.x),
+      fill: true,
+      borderColor: 'rgb(75, 192, 192)',
+    }]
+  };
+}
+
+export function getSpeechinessChartJsData(songs) {
+  const freq = getChartFreqVsData(songs, 'speechiness', 0.1);
+
+  return {
+    datasets: [{
+      data: Object.entries(freq).map(([x, y]) => ({x: x, y: y})).sort((a, b) => a.x - b.x),
+      fill: true,
+      borderColor: 'rgb(75, 192, 192)',
+    }]
+  };
+}
+
+export function getInstrumentalnessChartJsData(songs) {
+  const freq = getChartFreqVsData(songs, 'instrumentalness', 0.1);
+
+  return {
+    datasets: [{
+      data: Object.entries(freq).map(([x, y]) => ({x: x, y: y})).sort((a, b) => a.x - b.x),
+      fill: true,
+      borderColor: 'rgb(75, 192, 192)',
+    }]
+  };
+}
+

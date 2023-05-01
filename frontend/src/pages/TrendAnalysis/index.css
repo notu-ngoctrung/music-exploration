@@ -12,7 +12,6 @@
 
 .hot-100-url {
     font-size: 0.85em;
-    opacity: 70%;
     display: inline-block;
 }
 
@@ -26,3 +25,28 @@
 .hot-100-item-info {
     padding-left: 0.8em;
 }   
+
+.hot-100-expand-button {
+    border: none;
+    font-family: 'JetBrains Mono';
+}   
+
+.hot-100-item-detail {
+    font-size: 0.9em;
+    display: inline-block;
+}
+
+.spotify-logo {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 2px;
+  display: inline-block;
+  background: #1DB954;
+}
+
+.spotify-text {
+  font-weight: 700;
+}
+
+.helptab-item-detail {
+    font-size: 0.82em;
+}

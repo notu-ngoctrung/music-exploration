@@ -18,7 +18,7 @@ function Header() {
             fontFamily: 'JetBrains Mono'
           }}><label style={{ color: THEME.secondaryDarker }}>MUSIC&nbsp;</label>EXPLORATION</p>}
         ></Badge>
-        <label style={{ color: THEME.secondaryDarker }}>> trend&nbsp;</label>analysis&nbsp;
+        <label style={{ color: THEME.secondaryDarker }}>&gt; trend&nbsp;</label>analysis&nbsp;
       </p>
   );
 }

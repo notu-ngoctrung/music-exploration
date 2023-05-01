@@ -3,7 +3,7 @@ body {
   font-family: 'JetBrains Mono';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F8F9F9;
+  /* background-color: #F8F9F9; */
   font-size: 1rem;
   line-height: 1.65rem;
 }
