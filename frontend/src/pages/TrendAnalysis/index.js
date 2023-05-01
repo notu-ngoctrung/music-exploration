@@ -74,7 +74,7 @@ function TrendAnalysis() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${BACKEND_API}/api/billboard100-dummy.php`, {
+    fetch(`${BACKEND_API}/api/billboard100.php`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -228,7 +228,7 @@ function TrendAnalysis() {
           </Box>
         </Grid>
         {
-            !loading ? 
+            loading ? 
               (
                 <Grid item md={8} xs={7} display="flex" flexDirection="column" justifyContent="center" alignItems="center" textAlign="center">
                   <p>Loading data from Billboard Hot 100 & Spotify. <br/>It'd take <b>1-2 minutes</b>...</p>

@@ -14,7 +14,6 @@ function App() {
       <Routes>
         <Route path="/suggestion" element={<Suggestion />}/>
         <Route path="/trend-analysis" element={<TrendAnalysis />}/>
-        <Route path="/trend-network" element={<TrendNetwork />}/>
         <Route path="/" element={<Homepage />}/>
       </Routes>
     </BrowserRouter>

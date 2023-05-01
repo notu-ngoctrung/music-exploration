@@ -38,9 +38,8 @@ function Homepage() {
 
         <p></p><p></p>
         <ButtonGroup variant="outlined" color="secondary">
-          <Button onClick={() => window.open('/suggestion', '_blank')}>> suggestion</Button>
-          <Button onClick={() => window.open('/trend-analysis', '_blank')}>> trend analysis</Button>
-          <Button onClick={() => window.open('/trend-network', '_blank')}>> trend network</Button>
+          <Button onClick={() => window.open('/suggestion', '_blank')}>&gt; suggestion</Button>
+          <Button onClick={() => window.open('/trend-analysis', '_blank')}>&gt; trend analysis</Button>
         </ButtonGroup>
       </div>
     </ThemeProvider>

@@ -34,14 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $all_song_features = get_tracks_features($track_ids);
     $current_feature_id = 0;
 
-    foreach ($result as $song) {
+    foreach ($result as $key => $song) {
         if (empty($song['seed'])) {
-            $song['features'] = null;
+            $result[$key]['features'] = null;
         } else {
-            $song['features'] = $all_song_features[$current_feature_id];
+            $result[$key]['features'] = $all_song_features[$current_feature_id];
         }
 
-        $current_feature_id += 1;
+        $current_feature_id++;
     }
 
     echo json_encode($result);
