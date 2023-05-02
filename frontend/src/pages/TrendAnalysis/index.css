@@ -50,3 +50,10 @@
 .helptab-item-detail {
     font-size: 0.82em;
 }
+
+.helptab-item-detail-code {
+    display: inline-block;
+    background-color: #232323;
+    color: #F8F9F9;
+    margin-left: 1em;
+}

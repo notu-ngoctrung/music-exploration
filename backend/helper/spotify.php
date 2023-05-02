@@ -2,6 +2,13 @@
 
 require_once('config.php');
 
+header('Access-Control-Allow-Origin: *');
+
+header('Access-Control-Allow-Methods: GET, POST');
+
+header("Access-Control-Allow-Headers: *");
+
+
 function get_track_features($track_id) {
     global $CONFIG, $GLOBAL_DATA;
 
@@ -120,7 +127,6 @@ function if_song_exists($song, $singer) {
         'image_url' => $track['album']['images'][0]['url'],
         'popularity' => $track['popularity'],
         'release_date' => $track['album']['release_date'],
-        'genres' => empty($track['album']['genres']) ? array() : $track['album']['genres']
     );
 }
 
@@ -177,10 +183,11 @@ function get_recommended_list($seed_track, $limit, $original_song) {
             'image_url' => $track['album']['images'][0]['url'],
             'popularity' => $track['popularity'],
             'release_date' => $track['album']['release_date'],
-            'genres' => $track['album']['genres'],
             'features' => get_track_features($track['id']),
         ));
     }
+
+    $original_song['features'] = get_track_features($original_song['seed']);
 
     return array(
         'original' => $original_song,

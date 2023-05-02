@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import CmdLine from './CmdLine';
 import OutputText from './OutputText';
 import OutputSongs from './OutputSongs';
-// import './index.css';
+import './index.css';
 import CmdInput from './CmdInput';
 import Siriwave from 'react-siriwave';
 import PreviewPlayer from '../PreviewPlayer';
 import HelpSection from './HelpSection.js';
+import SongInfo from './SongInfo';
 
 /**
  * Terminal component.
@@ -39,7 +40,9 @@ function Terminal(props) {
               case 'output-songs':
                 return <OutputSongs content={item.content} />;
               case 'help':
-                return <HelpSection cmds={item.content} />
+                return <HelpSection cmds={item.content} />;
+              case 'output-info':
+                return <SongInfo song={item.content} />;
             }
           })}
 
