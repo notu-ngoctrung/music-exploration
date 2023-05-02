@@ -141,8 +141,8 @@ function TrendAnalysis() {
                   }}
                 >
                 {[...Array(10)].map((_, id) => <>
-                <Skeleton variant="circular" width={40} height={60} />
-                <Skeleton variant="rectangular" height={50} />
+                <Skeleton variant="circular" width={40} height={40} />
+                <Skeleton variant="rectangular" height={70} />
                 <p></p><br />
               </>)}
                 </List>
