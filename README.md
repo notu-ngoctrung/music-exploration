@@ -4,6 +4,6 @@ Brief intro:
 * React.js for frontend & PHP for backend.
 
 
-v.1.0.0 is out. try it @ [http://eecslab-22.case.edu/~tnn18/music-exploration-deploy/](http://eecslab-22.case.edu/~tnn18/music-exploration-deploy/)
+v.2.0.0 is out. try it @ [http://eecslab-22.case.edu/~tnn18/music-exploration-deploy/](http://eecslab-22.case.edu/~tnn18/music-exploration-deploy/)
 
 _== dearly & proudly sent to Prof. Loui :) ==_

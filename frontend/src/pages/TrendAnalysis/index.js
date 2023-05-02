@@ -195,6 +195,9 @@ function TrendAnalysis() {
                             &gt; <b>singers</b>: {song['singers'].map(s => s['name']).join(', ')}
                           </span> <br />
                           <span className="hot-100-item-detail">
+                            &gt; <b>release date</b>: {song['release_date']}
+                          </span> <br />
+                          <span className="hot-100-item-detail">
                             &gt; <b>spotify popularity</b>: {song['popularity']}
                           </span> <br />
                           <span className="hot-100-item-detail">

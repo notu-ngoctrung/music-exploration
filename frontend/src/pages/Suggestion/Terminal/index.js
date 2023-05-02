@@ -62,8 +62,6 @@ function Terminal(props) {
             <PreviewPlayer url={props.audioPreview['url']} />
           )}
 
-          {/* <HelpSection cmds={[]} /> */}
-
           <CmdInput 
             history={props.history}
             loading={props.loading}
