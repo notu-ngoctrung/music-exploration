@@ -130,11 +130,23 @@ function TrendAnalysis() {
             
             {
               loading ?
-                ([...Array(4)].map((_, id) => <>
-                <Skeleton variant="circular" width={40} height={40} />
+              (
+                <List
+                  sx={{
+                    width: '100%',
+                    // bgcolor: 'background.paper',
+                    position: 'relative',
+                    overflow: 'auto',
+                    maxHeight: `calc(100vh - 18em)`,
+                  }}
+                >
+                {[...Array(10)].map((_, id) => <>
+                <Skeleton variant="circular" width={40} height={60} />
                 <Skeleton variant="rectangular" height={50} />
-                <p></p>
-              </>))
+                <p></p><br />
+              </>)}
+                </List>
+              )
               : (
               <>
                 <List

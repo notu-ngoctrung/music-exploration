@@ -6,7 +6,7 @@
 import { useState } from 'react';
 import '../../App.css';
 import THEME from '../../color-scheme';
-import Header from '../../components/Header';
+import Header from './Header';
 
 import './index.css';
 import { Button, ButtonGroup } from '@mui/material';

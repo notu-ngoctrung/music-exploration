@@ -5,3 +5,29 @@
   height: 100vh; /* Set the height of the container to 100% of the viewport height */
   flex-flow: column;
 }
+
+.wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#header > p, a {
+  color: #232323;
+}
+
+#header a:hover {
+  color: #1ab26b
+}
+
+#powered {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+
+#powered img {
+  height: 2rem;
+  padding-left: 12px;
+  padding-right: 8px;
+}
